@@ -17,9 +17,9 @@ python -m http.server 8080
 
 ## Como usar via linha de comando?
 
-No exemplo, estamos iniciando o servidor HTTP na pora 8080
+No exemplo, estamos iniciando o servidor HTTP na porta 8080
 
-_O argumento -m do python é utilizado para executar pela linha de comando um módulo que não está localizado na pasta atual.. No nosso caso o módulo http.server não está na pasta onde estamos executando o comando._
+_O argumento -m do python é utilizado para executar pela linha de comando um módulo que não está localizado na pasta atual. No nosso caso o módulo http.server não está na pasta onde estamos executando o comando._
 
 ## Como usar via arquivo .py?
 - Crie o arquivo server.py
@@ -54,7 +54,7 @@ python server.py
 
 **Nota**
 > http.server não é recomendado o uso em ambiente de produção.
-> Documentação Ofical: [HTTP servers](https://docs.python.org/3/library/http.server.html#module-http.server "HTTP servers") 
+> Documentação Oficial: [HTTP servers](https://docs.python.org/3/library/http.server.html#module-http.server "HTTP servers") 
 ## Contato
 
 Leonardo Guimarães – [@leonardofgc](https://www.linkedin.com/in/leonardofgc/) – leonardofgc@gmail.com
