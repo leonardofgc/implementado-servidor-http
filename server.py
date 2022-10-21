@@ -1,7 +1,7 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from evento import Evento
 from evento_online import EventoOnLine
-
+import json
 ev = Evento("Aula De Python", "Rio de Janeiro")
 ev_online = EventoOnLine("Live de Python")
 ev2_online = EventoOnLine("Live de GoLang")
@@ -10,10 +10,10 @@ eventos = [ev, ev_online, ev2_online, ev3_online]
 class SimpleHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
-        self.send_response(200)  # Adiciona o código HTTP 200, é a resposta de sucesso que indica que a requisição foi bem sucedida.
-        self.send_header("Content-type","text/html; charset=utf-8")  # Adiciona dados ao cabeçalho HTTP, como o conteúdo retornado e a codificação.
-        self.end_headers()  # Indica o fim do cabeçalho HTTP na reposta
         if self.path == "/":
+            self.send_response(200)  # Adiciona o código HTTP 200, é a resposta de sucesso que indica que a requisição foi bem sucedida.
+            self.send_header("Content-type","text/html; charset=utf-8")  # Adiciona dados ao cabeçalho HTTP, como o conteúdo retornado e a codificação.
+            self.end_headers()  # Indica o fim do cabeçalho HTTP na reposta
             data = f"""
                 <html>
                     <head>
@@ -27,6 +27,9 @@ class SimpleHandler(BaseHTTPRequestHandler):
                 """.encode() # Um pequeno trecho html codificado por padrão em UTF-8
             self.wfile.write(data) # Contém o fluxo de saída para gravar a reposta ao cliente.
         elif self.path == "/eventos":
+            self.send_response(200)  # Adiciona o código HTTP 200, é a resposta de sucesso que indica que a requisição foi bem sucedida.
+            self.send_header("Content-type","text/html; charset=utf-8")  # Adiciona dados ao cabeçalho HTTP, como o conteúdo retornado e a codificação.
+            self.end_headers()  # Indica o fim do cabeçalho HTTP na reposta
             stylesheet = """
                 <style>
                     table{border-collapse: collapse;}
@@ -59,6 +62,20 @@ class SimpleHandler(BaseHTTPRequestHandler):
                         </table>
                     </html>""".encode()  # Um pequeno trecho html codificado por padrão em UTF-8
             self.wfile.write(data)  # Contém o fluxo de saída para gravar a reposta ao cliente.
+        elif self.path == "/api/eventos":
+            self.send_response(200)  # Adiciona o código HTTP 200, é a resposta de sucesso que indica que a requisição foi bem sucedida.
+            self.send_header("Content-type","application/json; charset=utf-8")  # Adiciona dados ao cabeçalho HTTP, como o conteúdo retornado e a codificação.
+            self.end_headers()  # Indica o fim do cabeçalho HTTP na reposta
+            dict_eventos = []
+            for ev in eventos:
+                dict_eventos.append({
+                    "id": ev.id,
+                    "nome": ev.nome,
+                    "local": ev.local
+                })
+            data = json.dumps(dict_eventos).encode()
+            self.wfile.write(data)
+
 
 try:
     server = HTTPServer(('localhost', 8000), SimpleHandler) # Passa os parãmetros para iniciar o servidor, o primeiro é uma tupla com o endereço e a porta do servidor e o segundo um handler para tratar as requisições.
