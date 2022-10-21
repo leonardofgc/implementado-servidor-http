@@ -45,11 +45,16 @@ python server.py
 ```
 
 ## Versão/Funcionalidade
+**Nota**
+> Na versão 0.1.0 os dados são exibidos já com template pré-definido, como objetivo é construir uma API Rest, não é ideal que seja feito desta forma e sim de forma mais universal, ou seja, retornado a lista em um formato JSON.
+* 0.1.0
+    * Listagem dos Eventos
+    * CHANGE: Adição das classes Evento e EventoOnLine
 * 0.0.1
     * Work in progress
 
 ## Melhorias
-- [ ] Exibir Dados
+- [x] Exibir Dados
 - [ ] Retornar Os Dados Em Um Formato Universal, Por Exemplo: JSON 
 
 **Nota**
